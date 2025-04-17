@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc3pek3ehjaxk"]
+
+[ext_resource type="Texture2D" uid="uid://d3pwk4hwyd37f" path="res://icon.svg" id="1_d7gx3"]
+[ext_resource type="Script" uid="uid://d0ythymwkpgtt" path="res://scripts/Spring.gd" id="2_gbb3d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbb3d"]
+size = Vector2(128, 128)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="base" type="StaticBody2D" parent="."]
+position = Vector2(497, 575)
+collision_layer = 16
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="base"]
+texture = ExtResource("1_d7gx3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="base"]
+shape = SubResource("RectangleShape2D_gbb3d")
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+position = Vector2(496, 575)
+node_a = NodePath("../base")
+node_b = NodePath("../chaine1")
+disable_collision = false
+length = 1.0
+
+[node name="chaine1" type="RigidBody2D" parent="."]
+position = Vector2(497, 443)
+collision_layer = 16
+collision_mask = 0
+mass = 0.2
+gravity_scale = -1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="chaine1"]
+texture = ExtResource("1_d7gx3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chaine1"]
+shape = SubResource("RectangleShape2D_gbb3d")
+
+[node name="DampedSpringJoint2D2" type="DampedSpringJoint2D" parent="."]
+position = Vector2(497, 443)
+node_a = NodePath("../chaine1")
+node_b = NodePath("../chaine2")
+disable_collision = false
+length = 1.0
+
+[node name="chaine2" type="RigidBody2D" parent="."]
+position = Vector2(497, 313)
+collision_layer = 16
+collision_mask = 0
+input_pickable = true
+mass = 0.2
+gravity_scale = -1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="chaine2"]
+texture = ExtResource("1_d7gx3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chaine2"]
+shape = SubResource("RectangleShape2D_gbb3d")
+
+[node name="DampedSpringJoint2D3" type="DampedSpringJoint2D" parent="."]
+position = Vector2(497, 313)
+node_a = NodePath("../chaine2")
+node_b = NodePath("../chaine3")
+disable_collision = false
+length = 1.0
+
+[node name="chaine3" type="RigidBody2D" parent="."]
+position = Vector2(497, 182)
+collision_layer = 32
+collision_mask = 2
+input_pickable = true
+mass = 0.2
+gravity_scale = -1.0
+script = ExtResource("2_gbb3d")
+
+[node name="Sprite2D" type="Sprite2D" parent="chaine3"]
+texture = ExtResource("1_d7gx3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chaine3"]
+shape = SubResource("RectangleShape2D_gbb3d")
+
+[connection signal="mouse_entered" from="chaine2" to="chaine2" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="chaine3" to="chaine3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="chaine3" to="chaine3" method="_on_mouse_exited"]
