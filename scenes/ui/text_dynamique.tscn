@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhitnpv7jfdjr"]
+
+[ext_resource type="Script" uid="uid://bf70yeyjnos2e" path="res://scripts/ui/text_dynamique.gd" id="1_d3g7v"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8fqo0"]
+viewport_path = NodePath("SubViewport")
+
+[node name="TextDynamique" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -652.0
+offset_bottom = -548.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_d3g7v")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("ViewportTexture_8fqo0")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(8000, 2000)
+
+[node name="TextLabel" type="Label" parent="SubViewport"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 60
+theme_override_constants/shadow_offset_y = 50
+theme_override_font_sizes/font_size = 1235
+text = "Hello World !"
+horizontal_alignment = 1
+vertical_alignment = 1

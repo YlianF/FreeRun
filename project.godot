@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="FreeRun"
-run/main_scene="uid://qm0d4ttsg0pc"
+run/main_scene="uid://c5gg0ho6f6qtp"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
