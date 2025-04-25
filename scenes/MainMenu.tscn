@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5gg0ho6f6qtp"]
+
+[ext_resource type="Script" uid="uid://c2ifxq1x8btfw" path="res://scripts/main_menu.gd" id="1_yqorp"]
+
+[node name="Control" type="CanvasLayer"]
+script = ExtResource("1_yqorp")
+
+[node name="Button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Play"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

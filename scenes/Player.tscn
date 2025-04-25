@@ -1,29 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://bp324tpp6xan8"]
+[gd_scene load_steps=9 format=3 uid="uid://bp324tpp6xan8"]
 
 [ext_resource type="Script" uid="uid://cc271rgh45hmd" path="res://scripts/Player.gd" id="1_kpjcp"]
+[ext_resource type="Texture2D" uid="uid://bs6003p1jlbs3" path="res://sprites/bloub.png" id="2_70d11"]
 [ext_resource type="Texture2D" uid="uid://d3pwk4hwyd37f" path="res://icon.svg" id="2_kne1u"]
 [ext_resource type="Script" uid="uid://vbjfjf8gxjc1" path="res://scripts/GrappleController.gd" id="3_kne1u"]
+[ext_resource type="Texture2D" uid="uid://lxiuru7oeoja" path="res://sprites/Grapple_active.png" id="4_qu4a1"]
+[ext_resource type="Texture2D" uid="uid://dlbuw4uavdyig" path="res://sprites/Grapple_inactive.png" id="5_70d11"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e80uo"]
-size = Vector2(128, 129)
+size = Vector2(140, 119.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kpjcp"]
 radius = 45.0444
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
+texture_filter = 1
 collision_mask = 2
 script = ExtResource("1_kpjcp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_kne1u")
+scale = Vector2(5, 5)
+texture = ExtResource("2_70d11")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(0, -0.25)
 shape = SubResource("RectangleShape2D_e80uo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.3, 0.3)
+zoom = Vector2(0.5, 0.5)
+limit_bottom = 1000
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="GrabbingHitbox" type="Area2D" parent="."]
 collision_layer = 0
@@ -35,6 +43,8 @@ shape = SubResource("CircleShape2D_kpjcp")
 [node name="GrappleController" type="Node2D" parent="."]
 z_index = -1
 script = ExtResource("3_kne1u")
+txt_full = ExtResource("4_qu4a1")
+txt_empt = ExtResource("5_70d11")
 
 [node name="Grapple" type="Line2D" parent="GrappleController"]
 points = PackedVector2Array(0, 0, 0, 0)
@@ -47,8 +57,8 @@ collision_mask = 2
 
 [node name="GrapplePreview" type="Sprite2D" parent="GrappleController/RayCast2D"]
 position = Vector2(800, 0)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_kne1u")
+scale = Vector2(2, 2)
+texture = ExtResource("4_qu4a1")
 
 [connection signal="body_entered" from="GrabbingHitbox" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="GrabbingHitbox" to="." method="_on_grabbing_hitbox_body_exited"]

@@ -4,6 +4,9 @@ extends Node2D
 @export var stiffness = 15.0
 @export var damping = 1.0
 
+@export var txt_full: Texture;
+@export var txt_empt: Texture;
+
 @onready var player := get_parent()
 @onready var ray := $RayCast2D
 @onready var rope := $Grapple
@@ -29,6 +32,11 @@ func _process(delta):
 		preview.global_position = ray.get_collision_point()
 	else:
 		preview.position = Vector2(800, 0)
+
+	if can_launch:
+		preview.texture = txt_full
+	else:
+		preview.texture = txt_empt
 
 func launch():
 	if ray.is_colliding() && can_launch:

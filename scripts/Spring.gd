@@ -13,14 +13,16 @@ func _physics_process(delta: float) -> void:
 	if holding && active:
 		apply_force(get_local_mouse_position())
 
-func _on_mouse_entered() -> void:
-	OnMouse = true
-
-func _on_mouse_exited() -> void:
-	OnMouse = false
-
 func activate():
 	active = true
 
 func deactivate():
 	active = false
+
+
+func _on_mouse_entered():
+	OnMouse = true
+
+
+func _on_mouse_exited():
+	OnMouse = false

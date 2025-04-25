@@ -10,6 +10,11 @@ var LastDirection: float = 1.0
 var CanGrip: bool = false
 var Gripping: RigidBody2D = null
 
+var max_lives = 3
+var lives = max_lives
+
+var last_cp
+
 @onready var gc := $GrappleController
 
 func _ready():
@@ -38,6 +43,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		if is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, Friction * delta)
+		if !is_on_floor():
+			velocity.x = move_toward(velocity.x, 0, Friction/10 * delta)
 
 	if Input.is_action_pressed("jump") and CanGrip:
 		Gravity = 0
@@ -46,24 +53,45 @@ func _physics_process(delta: float) -> void:
 
 	elif Input.is_action_just_released("jump") and CanGrip:
 		velocity = Gripping.linear_velocity * 1.5
+		if velocity.y > JumpVelocity:
+			velocity.y += JumpVelocity
 		Gripping.call("deactivate");
 		Gravity = 2000
 		CanGrip = false
 		Gripping = null
 		gc.can_launch = true
 
+	if global_position.y > 1000:
+		print(global_position)
+		velocity = Vector2(0,0)
+		if lives == 0:
+			global_position = Vector2(0,0)
+			lives = max_lives
+		else:
+			lives -= 1
+			if last_cp:
+				global_position = last_cp.global_position
+			else:
+				global_position = Vector2(0,0)
+
 	self.velocity = velocity
 	move_and_slide()
 
+	
+
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.name == "chaine3":
+	if body.name == "Boule":
 		CanGrip = true
 		Gripping = body as RigidBody2D
 		body.call("activate");
+	if body.name == "Checkpoint":
+		if last_cp != body:
+			last_cp = body
+			lives = max_lives
 
 
 func _on_grabbing_hitbox_body_exited(body:Node2D):
-	if body.name == "chaine3":
+	if body.name == "Boule":
 		CanGrip = false
 		Gripping = null
 		body.call("deactivate");
