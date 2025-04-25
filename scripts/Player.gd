@@ -1,10 +1,12 @@
 extends CharacterBody2D
 
-@export var Acceleration: float = 2000.0
+@export var Acceleration: float = 1500.0
 @export var JumpVelocity: float = -1000.0
 @export var Friction: float = 7000.0
 @export var Gravity: float = 2000.0
-@export var Speed: int = 2000
+@export var Speed: int = 1500
+
+@onready var HealthBar : TextureProgressBar = $UIPlayer/HealthBar
 
 var LastDirection: float = 1.0
 var CanGrip: bool = false
@@ -18,7 +20,8 @@ var last_cp
 @onready var gc := $GrappleController
 
 func _ready():
-	pass
+	HealthBar.max_value = max_lives
+	HealthBar.value = lives
 
 func _physics_process(delta: float) -> void:
 
@@ -44,7 +47,7 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, Friction * delta)
 		if !is_on_floor():
-			velocity.x = move_toward(velocity.x, 0, Friction/10 * delta)
+			velocity.x = move_toward(velocity.x, 0, Friction/50 * delta)
 
 	if Input.is_action_pressed("jump") and CanGrip:
 		Gravity = 0
@@ -52,9 +55,8 @@ func _physics_process(delta: float) -> void:
 		gc.can_launch = false
 
 	elif Input.is_action_just_released("jump") and CanGrip:
-		velocity = Gripping.linear_velocity * 1.5
-		if velocity.y > JumpVelocity:
-			velocity.y += JumpVelocity
+		velocity = Gripping.linear_velocity * 1.3
+
 		Gripping.call("deactivate");
 		Gravity = 2000
 		CanGrip = false
@@ -62,13 +64,16 @@ func _physics_process(delta: float) -> void:
 		gc.can_launch = true
 
 	if global_position.y > 1000:
-		print(global_position)
 		velocity = Vector2(0,0)
-		if lives == 0:
+		gc.retract()
+		if lives == 1:
 			global_position = Vector2(0,0)
 			lives = max_lives
+			HealthBar.value = lives
+			last_cp = null;
 		else:
 			lives -= 1
+			HealthBar.value = lives
 			if last_cp:
 				global_position = last_cp.global_position
 			else:

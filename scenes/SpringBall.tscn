@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4o5x7tivqm2s"]
+[gd_scene load_steps=8 format=3 uid="uid://b4o5x7tivqm2s"]
 
 [ext_resource type="Texture2D" uid="uid://dvqc6i4hf4ooq" path="res://sprites/ressort.png" id="1_8u8nq"]
 [ext_resource type="Script" uid="uid://d0ythymwkpgtt" path="res://scripts/Spring.gd" id="1_b24hq"]
@@ -10,6 +10,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1orsd"]
 radius = 64.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b24hq"]
+size = Vector2(476, 20)
 
 [node name="Springball" type="Node2D"]
 texture_filter = 1
@@ -28,7 +31,7 @@ stiffness = 64.0
 [node name="Chaine1" type="RigidBody2D" parent="."]
 position = Vector2(0, -90)
 collision_layer = 16
-collision_mask = 0
+collision_mask = 128
 mass = 0.1
 gravity_scale = -1.0
 
@@ -50,7 +53,7 @@ stiffness = 64.0
 [node name="Chaine2" type="RigidBody2D" parent="."]
 position = Vector2(0, -240)
 collision_layer = 16
-collision_mask = 0
+collision_mask = 128
 mass = 0.1
 gravity_scale = -1.0
 
@@ -72,7 +75,7 @@ stiffness = 64.0
 [node name="Chaine3" type="RigidBody2D" parent="."]
 position = Vector2(0, -390)
 collision_layer = 16
-collision_mask = 0
+collision_mask = 128
 mass = 0.1
 gravity_scale = -1.0
 
@@ -94,7 +97,7 @@ stiffness = 64.0
 [node name="Boule" type="RigidBody2D" parent="."]
 position = Vector2(0, -530)
 collision_layer = 32
-collision_mask = 2
+collision_mask = 130
 input_pickable = true
 mass = 0.1
 gravity_scale = -1.0
@@ -106,6 +109,15 @@ texture = ExtResource("2_b24hq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boule"]
 shape = SubResource("CircleShape2D_1orsd")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1, 49)
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2(2.04, 1)
+shape = SubResource("RectangleShape2D_b24hq")
 
 [connection signal="mouse_entered" from="Boule" to="Boule" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Boule" to="Boule" method="_on_mouse_exited"]
