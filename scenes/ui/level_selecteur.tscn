@@ -1,0 +1,110 @@
+[gd_scene load_steps=3 format=3 uid="uid://burmv8f2b007c"]
+
+[ext_resource type="Script" uid="uid://cm332jp60qb4a" path="res://scripts/ui/level_grid.gd" id="1_diumo"]
+[ext_resource type="PackedScene" uid="uid://bho5jwiptbbbh" path="res://scenes/ui/button.tscn" id="1_x8c20"]
+
+[node name="LevelSelecteur" type="CanvasLayer"]
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Ui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="_" type="Control" parent="Ui/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="Ui/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="_" type="Control" parent="Ui/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="LevelGrid" type="Control" parent="Ui/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+mouse_filter = 2
+
+[node name="GridContainer" type="GridContainer" parent="Ui/VBoxContainer/Control/HBoxContainer/LevelGrid"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 30
+columns = 4
+script = ExtResource("1_diumo")
+nbLevel = 15
+
+[node name="01" parent="Ui/VBoxContainer/Control/HBoxContainer/LevelGrid/GridContainer" instance=ExtResource("1_x8c20")]
+visible = false
+layout_mode = 2
+textButton = "01"
+
+[node name="02" parent="Ui/VBoxContainer/Control/HBoxContainer/LevelGrid/GridContainer" instance=ExtResource("1_x8c20")]
+visible = false
+layout_mode = 2
+textButton = "02"
+
+[node name="03" parent="Ui/VBoxContainer/Control/HBoxContainer/LevelGrid/GridContainer" instance=ExtResource("1_x8c20")]
+visible = false
+layout_mode = 2
+textButton = "03"
+
+[node name="04" parent="Ui/VBoxContainer/Control/HBoxContainer/LevelGrid/GridContainer" instance=ExtResource("1_x8c20")]
+visible = false
+layout_mode = 2
+textButton = "04"
+
+[node name="05" parent="Ui/VBoxContainer/Control/HBoxContainer/LevelGrid/GridContainer" instance=ExtResource("1_x8c20")]
+visible = false
+layout_mode = 2
+textButton = "05"
+
+[node name="_2" type="Control" parent="Ui/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="_2" type="Control" parent="Ui/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2

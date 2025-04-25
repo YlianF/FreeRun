@@ -1,0 +1,128 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5gg0ho6f6qtp"]
+
+[ext_resource type="Script" uid="uid://c2ifxq1x8btfw" path="res://scripts/main_menu.gd" id="1_yqorp"]
+[ext_resource type="PackedScene" uid="uid://bho5jwiptbbbh" path="res://scenes/ui/button.tscn" id="2_0ykhv"]
+[ext_resource type="Script" uid="uid://dt81e0lo2hhf3" path="res://scripts/ui/main_menu_panel.gd" id="2_2wh52"]
+[ext_resource type="Texture2D" uid="uid://d3pwk4hwyd37f" path="res://icon.svg" id="2_2ysvc"]
+
+[node name="Main Menu" type="CanvasLayer"]
+script = ExtResource("1_yqorp")
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Ui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="_" type="Control" parent="Ui/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Ui/VBoxContainer/_"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2ysvc")
+
+[node name="Control" type="Control" parent="Ui/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="_" type="Control" parent="Ui/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="MainMenuPanel" type="Control" parent="Ui/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("2_2wh52")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui/VBoxContainer/Control/HBoxContainer/MainMenuPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="_" type="Control" parent="Ui/VBoxContainer/Control/HBoxContainer/MainMenuPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Play" parent="Ui/VBoxContainer/Control/HBoxContainer/MainMenuPanel/VBoxContainer" instance=ExtResource("2_0ykhv")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+textButton = "Play"
+zoomValue = 1.15
+
+[node name="_2" type="Control" parent="Ui/VBoxContainer/Control/HBoxContainer/MainMenuPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Quit" parent="Ui/VBoxContainer/Control/HBoxContainer/MainMenuPanel/VBoxContainer" instance=ExtResource("2_0ykhv")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+textButton = "Quit"
+zoomValue = 1.15
+
+[node name="_3" type="Control" parent="Ui/VBoxContainer/Control/HBoxContainer/MainMenuPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="_2" type="Control" parent="Ui/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="_2" type="Control" parent="Ui/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[connection signal="gui_input" from="Ui/VBoxContainer/Control/HBoxContainer/MainMenuPanel/VBoxContainer/Play" to="Ui/VBoxContainer/Control/HBoxContainer/MainMenuPanel" method="_on_play_gui_input"]
+[connection signal="gui_input" from="Ui/VBoxContainer/Control/HBoxContainer/MainMenuPanel/VBoxContainer/Quit" to="Ui/VBoxContainer/Control/HBoxContainer/MainMenuPanel" method="_on_quit_gui_input"]
