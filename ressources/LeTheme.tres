@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bd6ru5cggrphn"]
+
+[ext_resource type="Texture2D" uid="uid://b2sebm2oecnk7" path="res://sprites/Cadre.png" id="1_pitpu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cfpjd"]
+texture = ExtResource("1_pitpu")
+texture_margin_left = 40.0751
+texture_margin_top = 37.9737
+texture_margin_right = 41.5658
+texture_margin_bottom = 36.4342
+region_rect = Rect2(0, 0, 400, 200)
+
+[resource]
+Panel/styles/panel = SubResource("StyleBoxTexture_cfpjd")
