@@ -126,7 +126,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			lives = max_lives
 			HealthBar.value = lives
 	if body.name.contains("Goal"):
-		get_tree().change_scene_to_file("res://scenes/ui/victory_menue.tscn");
+		get_tree().paused = true
+		var preloadScene = preload("res://scenes/ui/victory_menue.tscn");
+		var victoryMenu = preloadScene.instantiate();
+		add_child(victoryMenu)
+		victoryMenu.call_deferred("SetLevel", int(get_parent().name))
 
 
 func _on_grabbing_hitbox_body_exited(body:Node2D):

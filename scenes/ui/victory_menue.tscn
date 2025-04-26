@@ -9,6 +9,7 @@
 [node name="CanvasLayer" type="CanvasLayer"]
 process_mode = 3
 layer = 2
+script = ExtResource("3_jiwmu")
 
 [node name="VixtoryMenu" type="Control" parent="."]
 layout_mode = 3
@@ -76,7 +77,6 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-script = ExtResource("3_jiwmu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VixtoryMenu/Ui/VBoxContainer/Control/HBoxContainer/VictoryMenuPanel"]
 layout_mode = 1
@@ -91,6 +91,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
+colorTextButton = Color(1, 0.898039, 0.411765, 1)
 
 [node name="_3" type="Control" parent="VixtoryMenu/Ui/VBoxContainer/Control/HBoxContainer/VictoryMenuPanel/VBoxContainer"]
 layout_mode = 2
@@ -151,6 +152,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[connection signal="gui_input" from="VixtoryMenu/Ui/VBoxContainer/Control/HBoxContainer/VictoryMenuPanel/VBoxContainer/Next Level" to="VixtoryMenu/Ui/VBoxContainer/Control/HBoxContainer/VictoryMenuPanel" method="_on_next_level_gui_input"]
-[connection signal="gui_input" from="VixtoryMenu/Ui/VBoxContainer/Control/HBoxContainer/VictoryMenuPanel/VBoxContainer/Retry" to="VixtoryMenu/Ui/VBoxContainer/Control/HBoxContainer/VictoryMenuPanel" method="_on_retry_gui_input"]
-[connection signal="gui_input" from="VixtoryMenu/Ui/VBoxContainer/Control/HBoxContainer/VictoryMenuPanel/VBoxContainer/Level Select" to="VixtoryMenu/Ui/VBoxContainer/Control/HBoxContainer/VictoryMenuPanel" method="_on_level_select_gui_input"]
+[connection signal="gui_input" from="VixtoryMenu/Ui/VBoxContainer/Control/HBoxContainer/VictoryMenuPanel/VBoxContainer/Next Level" to="." method="_on_next_level_gui_input"]
+[connection signal="gui_input" from="VixtoryMenu/Ui/VBoxContainer/Control/HBoxContainer/VictoryMenuPanel/VBoxContainer/Retry" to="." method="_on_retry_gui_input"]
+[connection signal="gui_input" from="VixtoryMenu/Ui/VBoxContainer/Control/HBoxContainer/VictoryMenuPanel/VBoxContainer/Level Select" to="." method="_on_level_select_gui_input"]
