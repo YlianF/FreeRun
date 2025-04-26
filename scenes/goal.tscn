@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://7xddiu1hel7d"]
+
+[ext_resource type="Texture2D" uid="uid://d2v5nt6i7o5tr" path="res://sprites/goal.png" id="1_jbojv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sx1j4"]
+size = Vector2(171, 259)
+
+[node name="Node2D" type="StaticBody2D"]
+texture_filter = 1
+collision_layer = 32
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("1_jbojv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.5, 31.5)
+shape = SubResource("RectangleShape2D_sx1j4")

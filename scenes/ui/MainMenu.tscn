@@ -8,7 +8,7 @@
 [ext_resource type="Theme" uid="uid://bd6ru5cggrphn" path="res://ressources/LeTheme.tres" id="2_xpiny"]
 [ext_resource type="Shader" uid="uid://c27o8cdo3an7g" path="res://sprites/water.gdshader" id="3_nqjyj"]
 [ext_resource type="Texture2D" uid="uid://bitvebr6d7hvo" path="res://sprites/title.png" id="4_7mi0g"]
-[ext_resource type="Script" uid="uid://f87kigni3nwu" path="res://scripts/ui/Titre.gd" id="4_bhu4a"]
+[ext_resource type="Script" path="res://scripts/ui/Titre.gd" id="4_bhu4a"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7vr37"]
 noise_type = 3

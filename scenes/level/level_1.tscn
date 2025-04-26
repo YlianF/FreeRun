@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://dqm2vhdgd2kqk"]
+[gd_scene load_steps=22 format=4 uid="uid://dqm2vhdgd2kqk"]
 
 [ext_resource type="PackedScene" uid="uid://bp324tpp6xan8" path="res://scenes/Player.tscn" id="1_vonw3"]
 [ext_resource type="Script" uid="uid://bfjs5606krggd" path="res://scripts/Level.gd" id="1_wdc5c"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bb438dajxofoy" path="res://sprites/sky.png" id="7_klq6b"]
 [ext_resource type="Shader" uid="uid://c27o8cdo3an7g" path="res://sprites/water.gdshader" id="8_8c41q"]
 [ext_resource type="Texture2D" uid="uid://d3pwk4hwyd37f" path="res://icon.svg" id="9_olg7q"]
+[ext_resource type="PackedScene" uid="uid://7xddiu1hel7d" path="res://scenes/goal.tscn" id="10_wdc5c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qpocg"]
 texture = ExtResource("3_ppgk2")
@@ -214,3 +215,6 @@ material = SubResource("ShaderMaterial_8iemx")
 position = Vector2(5268, 853.5)
 scale = Vector2(118.406, 6.14844)
 texture = ExtResource("9_olg7q")
+
+[node name="Node2D" parent="." instance=ExtResource("10_wdc5c")]
+position = Vector2(11316, -641)
