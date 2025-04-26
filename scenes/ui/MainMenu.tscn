@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5gg0ho6f6qtp"]
+[gd_scene load_steps=7 format=3 uid="uid://c5gg0ho6f6qtp"]
 
 [ext_resource type="Script" uid="uid://c2ifxq1x8btfw" path="res://scripts/main_menu.gd" id="1_yqorp"]
 [ext_resource type="PackedScene" uid="uid://bho5jwiptbbbh" path="res://scenes/ui/button.tscn" id="2_0ykhv"]
 [ext_resource type="Script" uid="uid://dt81e0lo2hhf3" path="res://scripts/ui/main_menu_panel.gd" id="2_2wh52"]
 [ext_resource type="Texture2D" uid="uid://d3pwk4hwyd37f" path="res://icon.svg" id="2_2ysvc"]
+[ext_resource type="Theme" uid="uid://bd6ru5cggrphn" path="res://ressources/LeTheme.tres" id="2_xpiny"]
+[ext_resource type="Script" uid="uid://f87kigni3nwu" path="res://scripts/ui/Titre.gd" id="4_bhu4a"]
 
 [node name="Main Menu" type="CanvasLayer"]
 script = ExtResource("1_yqorp")
@@ -17,6 +19,15 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="ColorRect" type="ColorRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.65098, 1, 1)
+
 [node name="Ui" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -25,6 +36,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("2_xpiny")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Ui"]
 layout_mode = 1
@@ -48,6 +60,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_2ysvc")
+script = ExtResource("4_bhu4a")
 
 [node name="Control" type="Control" parent="Ui/VBoxContainer"]
 layout_mode = 2
@@ -91,7 +104,6 @@ mouse_filter = 2
 [node name="Play" parent="Ui/VBoxContainer/Control/HBoxContainer/MainMenuPanel/VBoxContainer" instance=ExtResource("2_0ykhv")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 textButton = "Play"
 zoomValue = 1.15
@@ -105,7 +117,6 @@ mouse_filter = 2
 [node name="Quit" parent="Ui/VBoxContainer/Control/HBoxContainer/MainMenuPanel/VBoxContainer" instance=ExtResource("2_0ykhv")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 textButton = "Quit"
 zoomValue = 1.15
