@@ -2,8 +2,11 @@ extends Control
 class_name TextDynamique
 
 @onready var _label : Label = %TextLabel;
+@export var colorTextButton : Color = Color.WHITE;
 
 
+func _ready():
+    SetFontColor(colorTextButton);
 
 
 func SetText(s: String) -> void :
