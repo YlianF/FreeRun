@@ -64,5 +64,9 @@ texture = ExtResource("4_qu4a1")
 
 [node name="UIPlayer" parent="." instance=ExtResource("7_cw2d6")]
 
+[node name="jump_buffer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
 [connection signal="body_entered" from="GrabbingHitbox" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="GrabbingHitbox" to="." method="_on_grabbing_hitbox_body_exited"]

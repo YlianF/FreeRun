@@ -216,5 +216,5 @@ position = Vector2(5268, 853.5)
 scale = Vector2(118.406, 6.14844)
 texture = ExtResource("9_olg7q")
 
-[node name="Node2D" parent="." instance=ExtResource("10_wdc5c")]
+[node name="Goal" parent="." instance=ExtResource("10_wdc5c")]
 position = Vector2(11316, -641)

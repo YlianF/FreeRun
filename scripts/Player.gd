@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var Speed: int = 1500
 
 @onready var HealthBar : TextureProgressBar = $UIPlayer/HealthBar
+@onready var JumpBuffer : Timer = $jump_buffer
 
 var LastDirection: float = 1.0
 var CanGrip: bool = false
@@ -26,7 +27,7 @@ func _ready():
 	HealthBar.value = lives
 
 func _physics_process(delta: float) -> void:
-
+	print(deact_grapple)
 	if is_on_floor() && !gc.launched && !deact_grapple:
 		gc.can_launch = true
 
@@ -35,6 +36,39 @@ func _physics_process(delta: float) -> void:
 	
 	handle_jump()
 
+	handle_direction(delta)
+
+	handle_grip()
+
+	if global_position.y > 1000:
+		handle_death()
+
+	self.velocity = velocity
+	move_and_slide()
+
+
+
+func get_gravity_custom(delta) -> float:
+	var g = Gravity * delta
+	if velocity.y > -100:
+		g *= 1.5
+	return g
+
+func handle_jump():
+	if JumpBuffer.is_stopped() && Input.is_action_just_pressed("jump"):
+		JumpBuffer.start()
+
+	if !JumpBuffer.is_stopped() && (is_on_floor() || gc.launched):
+		if is_on_floor():
+			velocity.y += JumpVelocity
+		else:
+			if velocity.y < JumpVelocity:
+				velocity.y += JumpVelocity/10
+			else:
+				velocity.y += JumpVelocity/2
+		gc.retract()
+
+func handle_direction(delta):
 	var direction: float = Input.get_action_strength("go_right") - Input.get_action_strength("go_left")
 	
 	if LastDirection != direction and direction != 0:
@@ -49,6 +83,7 @@ func _physics_process(delta: float) -> void:
 		if !is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, Friction/50 * delta)
 
+func handle_grip():
 	if Input.is_action_pressed("jump") and CanGrip:
 		Gravity = 0
 		global_position = Gripping.global_position
@@ -64,41 +99,21 @@ func _physics_process(delta: float) -> void:
 		if !deact_grapple:
 			gc.can_launch = true
 
-	if global_position.y > 1000:
-		velocity = Vector2(0,0)
-		gc.retract()
-		if lives == 1:
+func handle_death():
+	velocity = Vector2(0,0)
+	gc.retract()
+	if lives == 1:
+		global_position = Vector2(0,0)
+		lives = max_lives
+		HealthBar.value = lives
+		last_cp = null;
+	else:
+		lives -= 1
+		HealthBar.value = lives
+		if last_cp:
+			global_position = last_cp.global_position
+		else:
 			global_position = Vector2(0,0)
-			lives = max_lives
-			HealthBar.value = lives
-			last_cp = null;
-		else:
-			lives -= 1
-			HealthBar.value = lives
-			if last_cp:
-				global_position = last_cp.global_position
-			else:
-				global_position = Vector2(0,0)
-
-	self.velocity = velocity
-	move_and_slide()
-
-func get_gravity_custom(delta) -> float:
-	var g = Gravity * delta
-	if velocity.y > -100:
-		g *= 1.5
-	return g
-
-func handle_jump():
-	if Input.is_action_just_pressed("jump") && (is_on_floor() || gc.launched):
-		if is_on_floor():
-			velocity.y += JumpVelocity
-		else:
-			if velocity.y < JumpVelocity:
-				velocity.y += JumpVelocity/10
-			else:
-				velocity.y += JumpVelocity/2
-		gc.retract()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Boule":

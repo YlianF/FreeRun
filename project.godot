@@ -21,7 +21,7 @@ project/assembly_name="test"
 
 [global]
 
-NbLvl=15
+NbLvl=3
 
 [input]
 
