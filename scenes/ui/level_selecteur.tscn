@@ -1,9 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://burmv8f2b007c"]
+[gd_scene load_steps=12 format=3 uid="uid://burmv8f2b007c"]
 
 [ext_resource type="Texture2D" uid="uid://bfst3oae8s8w0" path="res://sprites/titlescreen.png" id="1_5qj80"]
 [ext_resource type="Theme" uid="uid://bd6ru5cggrphn" path="res://ressources/LeTheme.tres" id="1_afvd0"]
 [ext_resource type="Script" uid="uid://cm332jp60qb4a" path="res://scripts/ui/level_grid.gd" id="1_diumo"]
 [ext_resource type="PackedScene" uid="uid://bho5jwiptbbbh" path="res://scenes/ui/button.tscn" id="1_x8c20"]
+[ext_resource type="Shader" uid="uid://c27o8cdo3an7g" path="res://sprites/water.gdshader" id="5_6k81b"]
+[ext_resource type="Texture2D" uid="uid://d3pwk4hwyd37f" path="res://icon.svg" id="6_5dums"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_w538c"]
+noise_type = 3
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8c41q"]
+seamless = true
+noise = SubResource("FastNoiseLite_w538c")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_okj01"]
+noise_type = 3
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_olg7q"]
+seamless = true
+noise = SubResource("FastNoiseLite_okj01")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3c8ss"]
+shader = ExtResource("5_6k81b")
+shader_parameter/noise1 = SubResource("NoiseTexture2D_8c41q")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_olg7q")
+shader_parameter/scroll1 = Vector2(0.05, 0.05)
+shader_parameter/scroll2 = Vector2(-0.05, -0.05)
+shader_parameter/dist_strength = 0.05
+shader_parameter/tone_color = Color(0.702798, 0.906997, 0.985352, 1)
 
 [node name="LevelSelecteur" type="CanvasLayer"]
 
@@ -137,9 +164,21 @@ size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="_3" type="Control" parent="Ui/VBoxContainer"]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.76
 mouse_filter = 2
+
+[node name="Water" type="TextureRect" parent="Ui/VBoxContainer/_3"]
+material = SubResource("ShaderMaterial_3c8ss")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_5dums")
 
 [connection signal="gui_input" from="Ui/VBoxContainer/Haut/HBoxContainer/RetourVersLeFutur/Back" to="Ui/VBoxContainer/Centre/HBoxContainer/LevelGrid/GridContainer" method="_on_button_back_gui_input"]
