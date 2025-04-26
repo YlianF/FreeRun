@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://burmv8f2b007c"]
+[gd_scene load_steps=5 format=3 uid="uid://burmv8f2b007c"]
 
+[ext_resource type="Texture2D" uid="uid://bfst3oae8s8w0" path="res://sprites/titlescreen.png" id="1_5qj80"]
 [ext_resource type="Theme" uid="uid://bd6ru5cggrphn" path="res://ressources/LeTheme.tres" id="1_afvd0"]
 [ext_resource type="Script" uid="uid://cm332jp60qb4a" path="res://scripts/ui/level_grid.gd" id="1_diumo"]
 [ext_resource type="PackedScene" uid="uid://bho5jwiptbbbh" path="res://scenes/ui/button.tscn" id="1_x8c20"]
@@ -14,6 +15,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5qj80")
 
 [node name="Ui" type="Control" parent="."]
 layout_mode = 3

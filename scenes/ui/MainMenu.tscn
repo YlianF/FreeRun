@@ -1,11 +1,39 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5gg0ho6f6qtp"]
+[gd_scene load_steps=15 format=3 uid="uid://c5gg0ho6f6qtp"]
 
 [ext_resource type="Script" uid="uid://c2ifxq1x8btfw" path="res://scripts/main_menu.gd" id="1_yqorp"]
 [ext_resource type="PackedScene" uid="uid://bho5jwiptbbbh" path="res://scenes/ui/button.tscn" id="2_0ykhv"]
 [ext_resource type="Script" uid="uid://dt81e0lo2hhf3" path="res://scripts/ui/main_menu_panel.gd" id="2_2wh52"]
 [ext_resource type="Texture2D" uid="uid://d3pwk4hwyd37f" path="res://icon.svg" id="2_2ysvc"]
+[ext_resource type="Texture2D" uid="uid://bfst3oae8s8w0" path="res://sprites/titlescreen.png" id="2_e2per"]
 [ext_resource type="Theme" uid="uid://bd6ru5cggrphn" path="res://ressources/LeTheme.tres" id="2_xpiny"]
-[ext_resource type="Script" uid="uid://f87kigni3nwu" path="res://scripts/ui/Titre.gd" id="4_bhu4a"]
+[ext_resource type="Shader" uid="uid://c27o8cdo3an7g" path="res://sprites/water.gdshader" id="3_nqjyj"]
+[ext_resource type="Texture2D" uid="uid://bitvebr6d7hvo" path="res://sprites/title.png" id="4_7mi0g"]
+[ext_resource type="Script" path="res://scripts/ui/Titre.gd" id="4_bhu4a"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7vr37"]
+noise_type = 3
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8c41q"]
+seamless = true
+noise = SubResource("FastNoiseLite_7vr37")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kncl5"]
+noise_type = 3
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_olg7q"]
+seamless = true
+noise = SubResource("FastNoiseLite_kncl5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_clp4r"]
+shader = ExtResource("3_nqjyj")
+shader_parameter/noise1 = SubResource("NoiseTexture2D_8c41q")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_olg7q")
+shader_parameter/scroll1 = Vector2(0.05, 0.05)
+shader_parameter/scroll2 = Vector2(-0.05, -0.05)
+shader_parameter/dist_strength = 0.05
+shader_parameter/tone_color = Color(0.702798, 0.906997, 0.985352, 1)
 
 [node name="Main Menu" type="CanvasLayer"]
 script = ExtResource("1_yqorp")
@@ -19,14 +47,21 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="Background"]
+[node name="TextureRect" type="TextureRect" parent="Background"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0.65098, 1, 1)
+texture = ExtResource("2_e2per")
+
+[node name="Water" type="Sprite2D" parent="Background"]
+material = SubResource("ShaderMaterial_clp4r")
+position = Vector2(575, 683)
+scale = Vector2(9.04415, -1.79846)
+texture = ExtResource("2_2ysvc")
 
 [node name="Ui" type="Control" parent="."]
 layout_mode = 3
@@ -53,13 +88,20 @@ size_flags_stretch_ratio = 1.5
 mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="Ui/VBoxContainer/_"]
+texture_filter = 1
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -57.5
+offset_right = 90.0
+offset_bottom = 57.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_2ysvc")
+texture = ExtResource("4_7mi0g")
 script = ExtResource("4_bhu4a")
 
 [node name="Control" type="Control" parent="Ui/VBoxContainer"]

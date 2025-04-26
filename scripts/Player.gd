@@ -19,19 +19,21 @@ var last_cp
 
 @onready var gc := $GrappleController
 
+var deact_grapple = false;
+
 func _ready():
 	HealthBar.max_value = max_lives
 	HealthBar.value = lives
 
 func _physics_process(delta: float) -> void:
 
-	if is_on_floor() && !gc.launched:
+	if is_on_floor() && !gc.launched && !deact_grapple:
 		gc.can_launch = true
 
 	if not is_on_floor():
 		velocity.y += Gravity * delta
 
-	if Input.is_action_just_pressed("jump") && (is_on_floor() || gc.launched):
+	if Input.is_action_pressed("jump") && (is_on_floor() || gc.launched):
 		velocity.y += JumpVelocity
 		gc.retract()
 
@@ -61,7 +63,8 @@ func _physics_process(delta: float) -> void:
 		Gravity = 2000
 		CanGrip = false
 		Gripping = null
-		gc.can_launch = true
+		if !deact_grapple:
+			gc.can_launch = true
 
 	if global_position.y > 1000:
 		velocity = Vector2(0,0)
@@ -93,6 +96,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if last_cp != body:
 			last_cp = body
 			lives = max_lives
+			HealthBar.value = lives
 
 
 func _on_grabbing_hitbox_body_exited(body:Node2D):
@@ -100,3 +104,13 @@ func _on_grabbing_hitbox_body_exited(body:Node2D):
 		CanGrip = false
 		Gripping = null
 		body.call("deactivate");
+
+func deactivate_grapple():
+	gc.visible = false
+	deact_grapple = true
+
+func deactivate_lives():
+	pass
+
+func deactivate_mouse():
+	pass
