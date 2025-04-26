@@ -116,7 +116,7 @@ collision_layer = 128
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-scale = Vector2(2.04, 1)
+scale = Vector2(1.56, 1)
 shape = SubResource("RectangleShape2D_b24hq")
 
 [connection signal="mouse_entered" from="Boule" to="Boule" method="_on_mouse_entered"]

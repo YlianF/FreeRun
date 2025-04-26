@@ -9,3 +9,7 @@ extends Node2D
 func _ready():
     if grapple:
         player.deactivate_grapple()
+    if lives:
+        player.deactivate_lives()
+    if mouse:
+        player.deactivate_mouse()

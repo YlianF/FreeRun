@@ -31,11 +31,9 @@ func _physics_process(delta: float) -> void:
 		gc.can_launch = true
 
 	if not is_on_floor():
-		velocity.y += Gravity * delta
-
-	if Input.is_action_pressed("jump") && (is_on_floor() || gc.launched):
-		velocity.y += JumpVelocity
-		gc.retract()
+		velocity.y += get_gravity_custom(delta)
+	
+	handle_jump()
 
 	var direction: float = Input.get_action_strength("go_right") - Input.get_action_strength("go_left")
 	
@@ -85,14 +83,29 @@ func _physics_process(delta: float) -> void:
 	self.velocity = velocity
 	move_and_slide()
 
-	
+func get_gravity_custom(delta) -> float:
+	var g = Gravity * delta
+	if velocity.y > -100:
+		g *= 1.5
+	return g
+
+func handle_jump():
+	if Input.is_action_just_pressed("jump") && (is_on_floor() || gc.launched):
+		if is_on_floor():
+			velocity.y += JumpVelocity
+		else:
+			if velocity.y < JumpVelocity:
+				velocity.y += JumpVelocity/10
+			else:
+				velocity.y += JumpVelocity/2
+		gc.retract()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Boule":
 		CanGrip = true
 		Gripping = body as RigidBody2D
 		body.call("activate");
-	if body.name == "Checkpoint":
+	if body.name.contains("Checkpoint"):
 		if last_cp != body:
 			last_cp = body
 			lives = max_lives
@@ -110,7 +123,7 @@ func deactivate_grapple():
 	deact_grapple = true
 
 func deactivate_lives():
-	pass
+	HealthBar.visible = false
 
 func deactivate_mouse():
-	pass
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

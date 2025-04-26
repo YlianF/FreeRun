@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var rest_length = 200.0
+@export var rest_length = 150.0
 @export var stiffness = 15.0
 @export var damping = 1.0
 
@@ -68,7 +68,7 @@ func handle_grapple(delta):
 		
 		force = spring_force + damping
 	
-	player.velocity += force * delta
+	player.velocity += force * delta / 1.3
 	update_rope()
 
 func update_rope():
