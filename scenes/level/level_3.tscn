@@ -218,4 +218,4 @@ position = Vector2(7411, 204)
 position = Vector2(14682, -294)
 
 [node name="Goal" parent="." instance=ExtResource("10_mlldt")]
-position = Vector2(679, -83)
+position = Vector2(17510, -878)
