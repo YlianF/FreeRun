@@ -1,13 +1,12 @@
 extends GridContainer
 
 
-@export var nbLevel : int;
 
 
 
 func _ready():
 	var preloadScene = preload("res://scenes/ui/button.tscn");
-	for i in range(1, nbLevel+1):
+	for i in range(1, ProjectSettings.get_setting("global/NbLvl")+1):
 		var button = preloadScene.instantiate()
 		add_child(button)
 		button.SetText(str(i))

@@ -1,0 +1,142 @@
+[gd_scene load_steps=4 format=3 uid="uid://cidaowa4g31r2"]
+
+[ext_resource type="Theme" uid="uid://bd6ru5cggrphn" path="res://ressources/LeTheme.tres" id="2_h74jt"]
+[ext_resource type="Script" uid="uid://bglcpu2ehevak" path="res://scripts/ui/echape_menu_panel.gd" id="2_shp5l"]
+[ext_resource type="PackedScene" uid="uid://bho5jwiptbbbh" path="res://scenes/ui/button.tscn" id="3_b06xv"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+
+[node name="EchapeMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="ColorRect" parent="EchapeMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.720467, 0.720468, 0.720467, 0.235294)
+
+[node name="Ui" type="Control" parent="EchapeMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_h74jt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EchapeMenu/Ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="_" type="Control" parent="EchapeMenu/Ui/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="EchapeMenu/Ui/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EchapeMenu/Ui/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="_" type="Control" parent="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="EchapeMenuPanel" type="Control" parent="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("2_shp5l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer/EchapeMenuPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" parent="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer/EchapeMenuPanel/VBoxContainer" instance=ExtResource("3_b06xv")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+textButton = "Resume"
+zoomValue = 1.15
+
+[node name="_" type="Control" parent="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer/EchapeMenuPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Level Select" parent="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer/EchapeMenuPanel/VBoxContainer" instance=ExtResource("3_b06xv")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+textButton = "Level Select"
+zoomValue = 1.15
+
+[node name="_2" type="Control" parent="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer/EchapeMenuPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Main Menu" parent="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer/EchapeMenuPanel/VBoxContainer" instance=ExtResource("3_b06xv")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+textButton = "Main Menu"
+zoomValue = 1.15
+
+[node name="_2" type="Control" parent="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="_2" type="Control" parent="EchapeMenu/Ui/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="EchapeMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="gui_input" from="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer/EchapeMenuPanel/VBoxContainer/Resume" to="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer/EchapeMenuPanel" method="_on_resume_gui_input"]
+[connection signal="gui_input" from="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer/EchapeMenuPanel/VBoxContainer/Level Select" to="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer/EchapeMenuPanel" method="_on_level_select_gui_input"]
+[connection signal="gui_input" from="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer/EchapeMenuPanel/VBoxContainer/Main Menu" to="EchapeMenu/Ui/VBoxContainer/Control/HBoxContainer/EchapeMenuPanel" method="_on_main_menu_gui_input"]
