@@ -145,17 +145,33 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 mouse_filter = 2
 
-[node name="GridContainer" type="GridContainer" parent="Ui/VBoxContainer/Centre/HBoxContainer/LevelGrid"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui/VBoxContainer/Centre/HBoxContainer/LevelGrid"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="_" type="Control" parent="Ui/VBoxContainer/Centre/HBoxContainer/LevelGrid/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="GridContainer" type="GridContainer" parent="Ui/VBoxContainer/Centre/HBoxContainer/LevelGrid/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/h_separation = 30
 theme_override_constants/v_separation = 30
 columns = 4
 script = ExtResource("1_diumo")
+
+[node name="_2" type="Control" parent="Ui/VBoxContainer/Centre/HBoxContainer/LevelGrid/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="_2" type="Control" parent="Ui/VBoxContainer/Centre/HBoxContainer"]
 layout_mode = 2
@@ -180,4 +196,4 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_5dums")
 
-[connection signal="gui_input" from="Ui/VBoxContainer/Haut/HBoxContainer/RetourVersLeFutur/Back" to="Ui/VBoxContainer/Centre/HBoxContainer/LevelGrid/GridContainer" method="_on_button_back_gui_input"]
+[connection signal="gui_input" from="Ui/VBoxContainer/Haut/HBoxContainer/RetourVersLeFutur/Back" to="Ui/VBoxContainer/Centre/HBoxContainer/LevelGrid/VBoxContainer/GridContainer" method="_on_button_back_gui_input"]
